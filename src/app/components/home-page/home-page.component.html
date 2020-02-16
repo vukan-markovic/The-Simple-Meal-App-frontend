@@ -1,0 +1,94 @@
+<ng-container *ngIf="dailyMenu && dailyMenu.meals.length > 0; else elseTemplate">
+    <br>
+    <h3 >Daily menu for &nbsp; {{ dailyMenu.date | date :  "dd.MM.y" }} </h3><br>
+    <br>
+    <div *ngFor="let type of types">
+        <h6 *ngIf="!type.regular">{{ type.name }}</h6>
+        <div class="row" *ngIf="!type.regular">
+            <div *ngFor="let meal of dailyMenu.meals">
+                <div *ngIf="type.name == meal.types[0].name">
+                    <div class="col">
+                        <div *ngIf="meal" class="card border-success text-success mb-3"
+                            style="width: 18rem; margin: 1rem;">
+                            <div class="card-header bg-transparent"><b>{{ meal.name }} </b></div>
+                            <div class="card-body">
+                                <span class="card-subtitle mb-2">{{ meal.description }}</span><br><br>
+
+                                <div class="card-text" *ngFor="let type of meal.types">
+                                    <div class="row">
+                                        <div class="col-7"><span style="width: 100%;" class="badge badge-info">{{ type.name }}</span>
+                                        </div>
+                                        <div class="col-2"><span class="badge badge-dark">{{ type.price }}</span>
+                                        </div>
+                                        <div class="col-3"><input type="number" min="0" value="0" class="quantity"
+                                                (change)="onChange($event)"></div>
+                                    </div>
+                                </div>
+
+                                <span *ngIf="meal.earlyOrder" class="badge badge-warning">Early order</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><br>
+    <h6 *ngIf="showRegular">Regular</h6><br>
+    <div *ngFor="let type of types">
+        <div class="row" *ngIf="type.regular">
+            <div *ngFor="let meal of dailyMenu.meals">
+                <div *ngIf="type.name == meal.types[0].name">
+                    <div class="col">
+                        <div *ngIf="meal" class="card border-success text-success mb-3"
+                            style="width: 18rem; margin: 1rem;">
+                            <div class="card-header bg-transparent"><b>{{ meal.name }}</b></div>
+                            <div class="card-body">
+                                <span class="card-subtitle mb-2">{{ meal.description }}</span><br><br>
+
+                                <div class="card-text" *ngFor="let type of meal.types">
+                                    <div class="row">
+                                        <div class="col-7"><span style="width: 100%;" class="badge badge-info">{{ type.name }}</span>
+                                        </div>
+                                        <div class="col-2"><span class="badge badge-dark">{{ type.price }}</span>
+                                        </div>
+                                        <div class="col-3"><input type="number" min="0" value="0" class="quantity"
+                                                (change)="onChange($event)"></div>
+                                    </div>
+                                </div>
+
+                                <span *ngIf="meal.earlyOrder" class="badge badge-warning">Early order</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <br><button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal"
+        [disabled]="!isEnabled" (click)="order()">Order</button>
+    &nbsp;<button type="button" class="btn btn-danger" [disabled]="!isEnabled" (click)="resetOrder()">Reset</button>
+    
+    <br>
+    <app-modal-dialog [meals]="meals" (confirmed)="onConfirmed($event)"></app-modal-dialog>
+    <br>
+    <br>
+</ng-container>
+
+<ng-template #elseTemplate>
+    <div class="jumbotron" style="margin: 1%">
+        <h1 class="display-4">Hello Simple Task!</h1>
+        <p class="lead">Welcome to Food order application</p>
+        <hr class="my-4">
+        <div *ngIf="!dailyMenu">
+            <p>Currently there are no meals entered for today.</p>
+            <button *ngIf="isAdmin()" class="btn btn-primary btn-lg" (click)="menu()" role="button"
+                data-toggle="tooltip" data-placement="top" title="Add">Add menu</button>
+        </div>
+        <div *ngIf="dailyMenu">
+            <p>Today's time is up for ordering the meals. See what's on the menu tomorrow!</p>
+            <button class="btn btn-primary btn-lg" (click)="weeklyMenu()" role="button"
+                data-toggle="tooltip" data-placement="top" title="Weekly menu">See weekly menu</button>
+        </div>
+    </div>
+</ng-template>

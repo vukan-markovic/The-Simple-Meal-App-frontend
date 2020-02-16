@@ -1,0 +1,73 @@
+<div class="container">
+    <div class="row" style="width: 95%">
+        <h2>Orders for: &nbsp; </h2>
+        <select #combobox (change)="onComboboxChange($event.target.value)">
+            <option value="today" selected>Today</option>
+            <option value="tomorrow">Tomorrow</option>
+        </select>
+    </div>
+    <br>
+    <div class="row justify-content-center scrollit">
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 table-orders" style="width:90%">
+
+            <ng-container matColumnDef="user.name">
+                <th mat-header-cell *matHeaderCellDef> First Name </th>
+                <td mat-cell *matCellDef="let element"> {{element.user.name}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="user.lastName">
+                <th mat-header-cell *matHeaderCellDef> Last Name </th>
+                <td mat-cell *matCellDef="let element"> {{element.user.lastName}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="user.email">
+                <th mat-header-cell *matHeaderCellDef> Email </th>
+                <td mat-cell *matCellDef="let element"> {{element.user.email}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="meal.name">
+                <th mat-header-cell *matHeaderCellDef> Meal </th>
+                <td mat-cell *matCellDef="let element"> {{element.meal.name}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="meal.description">
+                <th mat-header-cell *matHeaderCellDef> Description </th>
+                <td mat-cell *matCellDef="let element"> {{element.meal.description}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="type.name">
+                <th mat-header-cell *matHeaderCellDef> Type </th>
+                <td mat-cell *matCellDef="let element"> <span class="badge badge-primary">{{element.type.name}}</span>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="type.price">
+                <th mat-header-cell *matHeaderCellDef> Price </th>
+                <td mat-cell *matCellDef="let element"> {{element.type.price}} RSD </td>
+            </ng-container>
+
+            <ng-container matColumnDef="paid">
+                <th mat-header-cell *matHeaderCellDef> Paid </th>
+                <td mat-cell *matCellDef="let element"> <span class="badge badge-success"
+                        *ngIf="element.paid">Paid</span><span class="badge badge-danger" *ngIf="!element.paid">Not
+                        paid</span> </td>
+            </ng-container>
+
+            <ng-container matColumnDef="userOrderId">
+                <th mat-header-cell *matHeaderCellDef> Cancel </th>
+                <td mat-cell *matCellDef="let element"> <button class="btn btn-secondary" type="button"
+                        data-toggle="modal" data-target="#exampleModal" (click)='onBtnClick(element.userOrderId)'>Cancel
+                        order</button>
+                    <app-modal-dialog *ngIf="showDialog" [order]="element"
+                        (confirmed)="onConfirm($event, element.userOrderId)">
+                    </app-modal-dialog>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+        </table>
+
+    </div>
+</div>

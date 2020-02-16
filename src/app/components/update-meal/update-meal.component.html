@@ -1,0 +1,62 @@
+<div class="modal fade center" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content  card-body">
+            
+            <div class="modal-header">
+                <h5 class="modal-title">Update a meal</h5>
+                <button type="button" id="closeButtonUpdateMeal" class="close" (click)="close()" data-dismiss="modal"
+                    aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>  <!--END class="modal-header"-->
+            <div class="modal-body">
+                <form [formGroup]="form" (ngSubmit)="onSubmit()" #dialogFormControl="ngForm">
+                    <div class="form-group row text-left">
+                        <label for="name" class="col-sm-3 col-form-label">Name</label>
+                        <div class="col-sm-9">
+                            <input type="text" [ngModel]="meal.name" class="form-control border margin" id="name"
+                                formControlName="name">
+                        </div>
+                        <!--END class="col-sm-9""-->
+                    </div>
+                    <!--END class="form-group row text-left"-->
+
+                    <div class="form-group row text-left">
+                        <label for="description" class="col-sm-3 col-form-label" >Description</label>
+                        <div class="col-sm-9">
+                            <input type="text" [ngModel]="meal.description" class="form-control border margin"
+                                id="description" formControlName="description">
+                        </div>
+                        <!--END class="col-sm-9""-->
+                    </div>
+                    <!--END class="form-group row text-left"-->
+
+                    <div class="form-group row text-left">
+                        <label for="earlyOrder" class="col-sm-3 col-form-label">Early order</label>
+                        <div class="col-sm-9">
+                            <input class="form-check-input border margin margin-checkbox" [ngModel]="meal.earlyOrder"
+                                type="checkbox" id="earlyOrder" formControlName="earlyOrder">
+                        </div>
+                        <!--END class="col-sm-9""-->
+                    </div>
+                    <!--END class="form-group row text-left"-->
+
+                    <div>
+                        <button type="button" class="btn btn-primary" [type]="submit"
+                            [disabled]="!dialogFormControl.valid">Update the
+                            meal</button>
+                    </div>
+                </form>
+
+            </div>
+            <!--END class="modal-body"-->
+
+        </div>
+        <!--END class="modal-content card-body"-->
+
+    </div>
+    <!--END class="modal-dialog"-->
+
+</div>
+<!--END class="modal fade center"-->

@@ -1,0 +1,31 @@
+.content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+}
+
+.center {
+    margin: auto;
+    width: 50%;
+}
+
+html, body { 
+    height: 100%; 
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+body { 
+    margin: 0; 
+    font-family: Roboto, "Helvetica Neue", sans-serif; 
+}
+.description {
+    max-width: 40% !important;
+  }
+
+.flashMessage {
+    position: -webkit-sticky  !important;
+    position: sticky  !important;
+     top: 0  !important;
+}

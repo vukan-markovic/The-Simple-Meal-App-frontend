@@ -1,0 +1,109 @@
+<header class="header-fix">
+  <nav class="col-md-12 navbar navbar-expand-lg navbar-dark bg-primary nav-default">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      ariacontrols="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span></button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="nav mr-auto">
+
+        <li *ngIf="isLoggedIn()" role="presentation" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+          <a data-toggle="tooltip" data-placement="top" title="Home" class="nav-link" [routerLink]="['/']">Home</a>
+        </li>
+
+        <li *ngIf="isLoggedIn() && isAdmin()" role="presentation" routerLinkActive="active"
+          [routerLinkActiveOptions]="{exact:true}">
+          <a data-toggle="tooltip" data-placement="top" title="Update type" [routerLink]="['/types']" class="nav-link"
+            href="#">Type update</a></li>
+
+        <li *ngIf="isAdmin()" role="presentation" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+          <a class="nav-link" data-toggle="tooltip" data-placement="top" title="Meal update"
+            [routerLink]="['/meals']">Meal update</a>
+        </li>
+
+        <li *ngIf="!isAdmin() && isLoggedIn()" class="nav-item dropdown" role="presentation" routerLinkActive="active"
+          [routerLinkActiveOptions]="{exact:true}">
+          <a data-toggle="tooltip" data-placement="top" title="Weekly menu" class="nav-link" href="#"
+            [routerLink]="['/weeklyMenu']">See menu</a>
+        </li>
+
+        <li *ngIf="!isAdmin() && !isChosenOne() && isLoggedIn()" class="nav-item dropdown" role="presentation"
+          routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+          <a data-toggle="tooltip" data-placement="top" title="My orders" class="nav-link"
+            [routerLink]="['/orderCanceling']">My orders</a>
+        </li>
+
+        <li *ngIf="isAdmin()" class="nav-item dropdown" role="presentation" routerLinkActive="active"
+          [routerLinkActiveOptions]="{exact:true}">
+          <a data-toggle="tooltip" data-placement="top" title="Users" class="nav-link"
+            [routerLink]="['/users']">Users</a>
+        </li>
+
+        <li *ngIf="isAdmin()" class="nav-item dropdown" role="presentation" routerLinkActive="active"
+          [routerLinkActiveOptions]="{exact:true}">
+          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+            aria-expanded="false">Weekly menu</a>
+          <div class="dropdown-menu">
+            <a data-toggle="tooltip" data-placement="top" title="Add menu" class="dropdown-item nav-link" href="#"
+              [routerLink]="['/addMenu']">Add menu</a>
+            <a data-toggle="tooltip" data-placement="top" title="Update menu" class="dropdown-item nav-link" href="#"
+              [routerLink]="['/updateWeeklyMenu']">Update menu</a>
+            <a data-toggle="tooltip" data-placement="top" title="Weekly menu" class="dropdown-item nav-link" href="#"
+              [routerLink]="['/weeklyMenu']">See menu</a>
+          </div>
+        </li>
+        <li *ngIf="isAdmin() || isChosenOne()" class="nav-item dropdown" role="presentation" routerLinkActive="active"
+          [routerLinkActiveOptions]="{exact:true}">
+          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+            aria-expanded="false">Orders</a>
+          <div class="dropdown-menu">
+            <a data-toggle="tooltip" data-placement="top" title="My orders" class="dropdown-item nav-link"
+              [routerLink]="['/orderCanceling']">My orders</a>
+
+            <a *ngIf="isAdmin()" class="dropdown-item nav-link" data-toggle="tooltip" data-placement="top"
+              title="All ordeers" [routerLink]="['/admin/seeAllOrders']">All orders</a>
+
+            <a *ngIf="isChosenOne()" class="dropdown-item nav-link" data-toggle="tooltip" data-placement="top"
+              title="Today orders" [routerLink]="['/todayOrders']">Today orders</a>
+          </div>
+        </li>
+      </ul>
+
+      <!--EVERYONE-->
+      <div *ngIf="user && isLoggedIn()">
+        <img *ngIf="user.pathImage" [src]="user.pathImage" alt="Avatar" class="avatar">
+        <img *ngIf="!user.pathImage" src="assets/profile.jpg" alt="Avatar" class="avatar">
+      </div>
+      <ul class="nav">
+
+        <li *ngIf="!isLoggedIn()" role="presentation" routerLinkActive="active"
+          [routerLinkActiveOptions]="{exact:true}">
+
+          <a data-toggle="tooltip" data-placement="top" title="Register" class="nav-link"
+            [routerLink]="['/register']">Register</a>
+        </li>
+
+        <li *ngIf="!isLoggedIn()" role="presentation" routerLinkActive="active"
+          [routerLinkActiveOptions]="{exact:true}"> <a class="nav-link" [routerLink]="['/login']" data-toggle="tooltip"
+            data-placement="top" title="Login">Login</a>
+        </li>
+
+        <li *ngIf="isLoggedIn()" role="presentation" id="logedAs">
+
+          Logged in as&nbsp; <a [routerLink]="['/profile']">{{user?.name}} {{user?.lastName}} (Role: <span
+              *ngIf="isAdmin()">Admin</span>
+            <span *ngIf="isChosenOne()">Chosen one</span><span *ngIf="!isAdmin() && !isChosenOne()">Regular
+              user</span>)</a>.
+        </li>
+
+        <li role="presentation" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" *ngIf="isLoggedIn()">
+
+          <button class="btn btn-primary logout" (click)="onLogout()" data-toggle="tooltip"
+            data-placement="top">Logout</button>
+        </li>
+      </ul>
+
+    </div>
+    <!--END collapse navbar-collapse -->
+  </nav>
+</header>

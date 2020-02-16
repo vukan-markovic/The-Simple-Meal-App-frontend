@@ -1,0 +1,16 @@
+.table-orders {
+    width: 95%;
+  }
+
+.scrollit {
+    overflow-y:auto;
+    height:500px;
+  }
+
+.mat-row {
+  height: auto;
+}
+
+.mat-cell, .mat-header-cell {
+  padding: 0px 10px;
+}

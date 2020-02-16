@@ -1,0 +1,22 @@
+<div class="container">
+    <div *ngIf="weeklyMenu">
+        <br>
+
+        <h3>Weekly menu from <b>{{ weeklyMenu.dateFrom | date : 'd/MM/y'}} </b> to <b>
+                {{ weeklyMenu.dateTo | date : 'd/MM/y'}}</b></h3>
+        <br>
+        <div class="col-4">
+            <img *ngIf="weeklyMenu" [src]="weeklyMenu.imagePath" id="image">
+        </div>
+
+
+
+    </div>
+    <!--END content-->
+
+    <p *ngIf="!weeklyMenu" class="content ">
+        <b>No weekly menu for this week has been added yet!</b>
+    </p>
+
+</div>
+<!--END container center-->

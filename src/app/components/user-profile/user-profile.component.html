@@ -1,0 +1,44 @@
+<br><br>
+<div *ngIf="userDTO" class="container">
+    <div class="card">
+        <h4 class="card-header">{{ userDTO.name }} {{ userDTO.lastName }}</h4>
+        <div class="card-body">
+            <img *ngIf="userDTO.pathImage" [src]="userDTO.pathImage" alt="Profile Picture" width="80px" height="80px">
+            <img *ngIf="!userDTO.pathImage" src="assets/profile.jpg" alt="Profile Picture" width="80px" height="80px">
+            <br>
+            <br>
+            <div class="row justify-content-center">
+                <div class="col-sm-4 col-sm-offset-4">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroupFileAddon01">Update image</span>
+                        </div>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="inputGroupFile01"
+                                aria-describedby="inputGroupFileAddon01" accept='image/*'
+                                (change)="onSelectFile($event)">
+                            <label style="overflow: hidden;" class="custom-file-label text-left" for="inputGroupFile01">Choose image</label>
+                            <br><br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row justify-content-center">
+                <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+                    <div class="form-group"><br>
+                        <label for="email">Email</label>
+                        <input [(ngModel)]="userDTO.email" (ngModelChange)="emailChange($event)" type="text"
+                            formControlName="email" class="form-control" />
+                    </div>
+                    <button type="submit" [disabled]="!userForm.valid || !isEnabled" class="btn btn-primary"
+                        data-toggle="tooltip" data-placement="top" title="Update email">Update</button>
+                </form>
+            </div>
+
+        </div>
+        <!--END class="card-body"-->
+    </div>
+    <!--END class"card"-->
+</div>
+<!--END class="container"-->

@@ -1,0 +1,49 @@
+
+.modal-lg {
+  max-width:  90% !important;
+  max-height: 90% !important;
+  width: 70%  !important;
+}
+
+#image {
+  width: 90%;
+ height: 90%;
+ object-fit: contain;
+}
+
+.table-daily-menu {
+  width: 100%;
+}
+
+.filterButton{
+  width: 100%;
+}
+::ng-deep .mat-sort-header-container {
+    display:flex;
+    justify-content:center;
+  }
+  .mat-column-update{
+    width: 33% !important;
+  }
+  .scrollit {
+    overflow-y:auto;
+    height:400px;
+  }
+  
+  .scrollit-modal {
+    overflow-y:auto;
+  }
+  .table-small{
+    margin-left:27%;
+  }
+  .bottom-buffer { margin-bottom:20px; }
+
+  #search:hover, #search:active {
+    cursor: pointer;
+  }
+
+  .filter-meals{
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+  }

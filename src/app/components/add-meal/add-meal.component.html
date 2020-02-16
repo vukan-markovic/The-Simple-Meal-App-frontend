@@ -1,0 +1,89 @@
+<div class="modal fade center" id="addMeal" tabindex="-1" role="dialog" aria-labelledby="addMealLabel"
+    aria-hidden="true">
+
+    <div class="modal-dialog" role="document">
+
+        <div class="modal-content card-body">
+
+            <div class="modal-header">
+                <div *ngIf="typesEmpty" class="alert alert-danger">
+                    First you need to create type!
+                </div>
+                <!--END class="alert alert-danger"-->
+                <h5 *ngIf="!typesEmpty" class="modal-title">Add a new meal</h5>
+                <button  *ngIf="!typesEmpty" id="closeButtonAddMeal" type="button" class="close" data-dismiss="modal"
+                    aria-label="Close" data-toggle="tooltip" data-placement="top" title="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <!--END class="modal-header"-->
+
+            <div class="modal-body" *ngIf="!typesEmpty">
+
+                <form [formGroup]="form" (ngSubmit)="onSubmit()" #dialogFormControl="ngForm">
+
+                    <div class="form-group row text-left">
+                        <label for="name" class="col-sm-3 col-form-label">Name</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control border margin" id="name" formControlName="name">
+                        </div>
+                        <!--END class="col-sm-9""-->
+                    </div>
+                    <!--END class="form-group row text-left"-->
+
+                    <div class="form-group row text-left">
+                        <label for="description" class="col-sm-3 col-form-label">Description</label>
+                        <div class="col-sm-9">
+                            <textarea type="text" class="form-control border margin" id="description"
+                                formControlName="description"></textarea>
+                        </div>
+                        <!--END class="col-sm-9""-->
+                    </div>
+                    <!--END class="form-group row text-left"-->
+
+                    <div class="form-group row text-left">
+                        <label for="earlyOrder" class="col-sm-3 col-form-label">Early order</label>
+                        <div class="col-sm-9">
+                            <input class="form-check-input border margin margin-checkbox" type="checkbox" id="earlyOrder"
+                                formControlName="earlyOrder">
+                        </div>
+                        <!--END class="col-sm-9""-->
+                    </div>
+                    <!--END class="form-group row text-left"-->
+
+                    <div class="form-group row text-left">
+                        <label for="types" class="col-sm-3 col-form-label">Type</label>
+                        <div class="col-sm-9">
+                            <select id="nameType" [(ngModel)]="currentType"  class="selectpicker border margin form-control"
+                                (change)="onChange(currentType)" formControlName="nameType" required>
+                                <option *ngFor="let type of types" [ngValue]="type">{{ type.name }}</option>
+                            </select>
+                        </div>
+                        <!--END class="col-sm-9""-->
+                    </div>
+                    <!--END class="form-group row text-left"-->
+
+                    <div *ngIf="showPrice" class="form-group row text-left">
+                        <label for="price" class="col-sm-3 col-form-label">Price</label>
+                        <div class="col-sm-9">
+                            <input type="number" class="form-control border margin" id="price" formControlName="price">
+                        </div>
+                        <!--END class="col-sm-9""-->
+                    </div>
+                    <!--END class="form-group row text-left"-->
+
+                    <button type="button" class="btn btn-primary" [type]="submit" [disabled]="!dialogFormControl.valid"
+                        data-toggle="tooltip" data-placement="top" title="Add meal">Add
+                        meal</button>
+                </form>
+            </div>
+            <!--END class="modal-body"-->
+
+        </div>
+        <!--END class="modal-content card-body"-->
+
+    </div>
+    <!--END class="modal-dialog"-->
+
+</div>
+<!--END class="modal fade center"-->

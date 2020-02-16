@@ -1,0 +1,17 @@
+.table-order-caceling {
+    width: 75%;
+  }
+  ::ng-deep .mat-sort-header-container {
+    display:flex;
+    justify-content:center;
+  }
+  
+  .mat-column-update{
+    width: 33% !important;
+  }
+  
+  .scrollit {
+    overflow-y:auto;
+    height:500px;
+  }
+  .top-buffer { margin-top:1%; }

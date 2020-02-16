@@ -1,0 +1,12 @@
+.todayOrders {
+    width: 95%;
+}
+
+.scrollit {
+    overflow-y:auto;
+    height:500px;
+}
+
+.table-cell {
+    padding: 5px 10px;
+}

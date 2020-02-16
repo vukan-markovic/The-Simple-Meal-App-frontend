@@ -1,0 +1,62 @@
+<br>
+<div class="container">
+    <div class="card text-center">
+        <div *ngIf="weeklyMenus.length == 0" class="alert alert-danger">
+            List of weekly menu is empty. If you want to create a weekly menu, press the button. &nbsp;  
+             <a title="Add menu" class="btn btn-primary" href="#" [routerLink]="['/addMenu']">Add menu</a>
+        </div> <!--END class="alert alert-danger" -->
+
+        <h4 class="card-header"> Weekly Menus</h4>
+        <div class="card-body">
+            <div class="row filter-menus">
+                <h4>Choose weekly menu &nbsp;</h4>
+                <select (change)="onChange()"  data-size="3"  class="selectpicker" [(ngModel)]="currentWeeklyMenu" name="currentWeeklyMenu">
+                    <option *ngFor="let weeklyMeny of weeklyMenus" [ngValue]="weeklyMeny" let i=index>
+                        {{ weeklyMeny.dateFrom | date: 'd/MM/y'}} - {{ weeklyMeny.dateTo |date : 'd/MM/y' }}
+                    </option>
+                </select>
+            </div> <!--END class="row bottom-buffer" -->
+            <br>
+            <!--END class="row bottom-buffer"-->
+            <div class="row justify-content-center scrollit">
+
+                <table mat-table [dataSource]="dailyMenuDataSource" class="mat-elevation-z8 table-weekly-menu " matSort>
+                    <ng-container matColumnDef="date">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
+                        <td mat-cell *matCellDef="let element"> {{element.date | date : 'EEEE d/MM'}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="meals">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Meals </th>
+                        <td mat-cell *matCellDef="let element">
+
+                            <table class="table-small " style="text-align: justify">
+                                <tr *ngFor="let meal of element.meals; let i = index">
+                                    <td>{{i+1}} . <b>{{meal.name}}</b></td>
+                                </tr>
+                            </table>
+
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="updateMenu">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Update menu </th>
+                        <td mat-cell *matCellDef="let element">
+                            <button mat-button class="btn btn-success" data-toggle="modal"
+                                (click)="updateDailyMenu(element)" data-target="#updateDailyMenuModal">Update daily
+                                menu</button>
+                        </td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns sticky: true" ></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+            </div>
+            <!--END class="row justify-content-center scrollit"-->
+        </div>
+        <!--END class="card-body" -->
+    </div>
+    <!--END class="card text-center"-->
+</div>
+<!--END class="container"-->
+
+<app-update-daily-menu [dailyMenu]="currentDailyMenu"></app-update-daily-menu>

@@ -1,0 +1,32 @@
+.table-meals {
+  width: 75%;
+}
+
+.filter-meals{
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+}
+
+::ng-deep .mat-sort-header-container {
+  display:flex;
+  justify-content:center;
+}
+
+.mat-column-update{
+  width: 33% !important;
+}
+
+.filterButton{
+  width: 83%;
+  padding-left: 12%;
+}
+
+.scrollit {
+  overflow-y:auto;
+  height:500px;
+}
+
+#search:hover, #search:active {
+  cursor: pointer;
+}

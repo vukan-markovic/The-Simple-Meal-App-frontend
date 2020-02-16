@@ -1,0 +1,35 @@
+.table-weekly-menu {
+  width: 75%;
+}
+
+::ng-deep .mat-sort-header-container {
+  display:flex;
+  justify-content:center;
+}
+
+.mat-column-updateMenu{
+  width: 33% !important;
+}
+
+.scrollit {
+  overflow-y:auto;
+  height:500px;
+}
+
+.table-small{
+  margin-left:27%;
+}
+
+.bottom-buffer { margin-bottom:20px; }
+
+.border {
+  border: 1px solid darkblue;
+}
+
+.margin {
+  margin-left: 15px;
+}
+
+.filter-menus {
+  padding-left: 12%
+}

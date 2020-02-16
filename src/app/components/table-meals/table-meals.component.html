@@ -1,0 +1,68 @@
+<div class="container">
+    <div class="card text-center w-60">
+        <h4 class="card-header"> List of meals</h4>
+
+        <div class="card-body">
+
+            <div *ngIf="meals.length==0" class="alert alert-danger">List of meal is empty!</div>
+
+            <div class="row">
+                <div class="row filterButton">
+                    <div class="col filter-meals text-left">
+                        <mat-form-field>
+                            <mat-label>Search</mat-label>
+                            <input matInput (keyup)="applyFilter($event.target.value)"
+                                placeholder="By name or description" id="filterInput">
+                            <button mat-button matPrefix mat-icon-button>
+                                <mat-icon>search</mat-icon>
+                            </button>
+
+                        </mat-form-field>
+                    </div>
+                    <!--END class="col filter-meals text-left"-->
+                    <div class="col text-right">
+                        <button type="button" id="addNewMeal" class="btn btn-success" data-toggle="modal"
+                            data-target="#addMeal" data-placement="center" title="Create new meal">Create
+                            new meal</button>
+                    </div>
+                    <!--END class="col text-right"-->
+                </div>
+
+            </div>
+
+            <div class="row justify-content-center scrollit">
+                <table mat-table [dataSource]="mealsDataSource" class="mat-elevation-z8 table-meals" matSort>
+
+                    <ng-container matColumnDef="name">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+                        <td mat-cell *matCellDef="let element"> {{element.name}}&nbsp;&nbsp;</td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="description">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="description"> Description </th>
+                        <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="update">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Update meal </th>
+                        <td mat-cell *matCellDef="let element">
+                            <button mat-button class="btn btn-success" data-toggle="modal" (click)="update(element)"
+                                data-target="#exampleModal">Update a meal</button>
+                        </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns sticky: true"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+            </div>
+            <!--END class="row justify-content-center scrollit"-->
+
+        </div>
+        <!--class="card-body"-->
+    </div>
+    <!--END ngclass="card text-center w-60"-->
+</div>
+<!--END class="container"-->
+
+<app-update-meal [meal]="currentMeal"></app-update-meal>
+<app-add-meal></app-add-meal>

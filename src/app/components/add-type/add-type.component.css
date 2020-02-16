@@ -1,0 +1,11 @@
+.border {
+    border: 1px solid darkblue;
+}
+
+.margin {
+    margin-left: 15px;
+}
+
+.margin-checkbox {
+    margin-top: 15px;
+}

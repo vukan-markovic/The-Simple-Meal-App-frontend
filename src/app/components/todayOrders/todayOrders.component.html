@@ -1,0 +1,60 @@
+<div class="container">
+    <div class="text-center">
+        <h2>Today orders &nbsp; </h2>
+    </div>
+
+    <button class="btn btn-primary" (click)="notify()">Send checkout notification</button>
+
+    <br>
+    <br>
+    <div *ngIf="success" class="alert alert-success">{{success}}</div>
+    <div *ngIf="errorMsg" class="alert alert-danger">{{errorMsg}}</div>
+
+    <div *ngIf="!orders" class="alert alert-danger row">
+        There is no orders for today.
+    </div>
+
+    <div *ngIf="orders" class="row justify-content-center scrollit">
+        <table class="mat-elevation-z8 todayOrders" style="width:90%">
+            <tr>
+                <th class="table-cell mat-header-cell">First name</th>
+                <th class="table-cell mat-header-cell">Last name</th>
+                <th class="table-cell mat-header-cell">Email</th>
+                <th class="table-cell mat-header-cell">Details</th>
+                <th class="table-cell mat-header-cell">Summary</th>
+                <th class="table-cell mat-header-cell">Paid</th>
+            </tr>
+            <tr class="table-row" *ngFor="let group of groupedOrders | keyvalue">
+                <td class="table-cell mat-cell">{{group.value[0].user.name}}</td>
+                <td class="table-cell mat-cell">{{group.value[0].user.lastName}}</td>
+                <td class="table-cell mat-cell">{{group.value[0].user.email}}</td>
+                <td class="table-cell mat-cell">
+                    <input
+                        (change)="showDetails.set(group.value[0].user.userId, !showDetails.get(group.value[0].user.userId))"
+                        type="checkbox" />
+                    <label>Show/Hide</label>
+                    <div *ngIf="showDetails.get(group.value[0].user.userId)">
+                        <table class="mat-elevation-z8">
+                            <tr>
+                                <th class="table-cell mat-header-cell">Meal</th>
+                                <th class="table-cell mat-header-cell">Description</th>
+                                <th class="table-cell mat-header-cell">Type</th>
+                                <th class="table-cell mat-header-cell">Price</th>
+                            </tr>
+                            <tr *ngFor="let order of group.value">
+                                <td class="table-cell mat-cell">{{order.meal.name}}</td>
+                                <td class="table-cell mat-cell">{{order.meal.description}}</td>
+                                <td class="table-cell mat-cell"><span class="badge badge-primary">{{order.type.name}}</span></td>
+                                <td class="table-cell mat-cell">{{order.type.price}} RSD</td>
+                            </tr>
+                        </table>
+                    </div>
+                </td>
+                <td class="table-cell mat-cell">{{sum.get(group.value[0].user.userId)}} RSD</td>
+                <td class="table-cell mat-cell"><input (change)="checkboxChanged($event, group.value)"
+                        [checked]="group.value[0].paid" type="checkbox" />
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

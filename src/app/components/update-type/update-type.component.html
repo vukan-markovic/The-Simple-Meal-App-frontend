@@ -1,0 +1,43 @@
+<div class="modal fade center" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content card-body">
+            <div class="modal-header">
+                <h5 class="modal-title">Update the type</h5>
+                <button type="button" class="close" id="closeButtonUpdateType" (click)="close()" data-dismiss="modal"
+                    aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="form" (ngSubmit)="onSubmit()" #dialogFormControl="ngForm">
+                    <div class="form-group row  text-left">
+                        <label for="name" class="col-sm-3 col-form-label">Name</label>
+                        <div class="col-sm-9">
+                            <input type="text" [ngModel]="type.name" class="form-control border margin" id="name"
+                                formControlName="name">
+                        </div>
+                    </div>
+                    <div class="form-group row  text-left">
+                        <label for="price" class="col-sm-3 col-form-label">Price</label>
+                        <div class="col-sm-9">
+                            <input type="number" [ngModel]="type.price" class="form-control border margin" id="price"
+                                formControlName="price">
+                        </div>
+                    </div>
+
+                    <div class="form-group row  text-left">
+                        <label for="regular" class="col-sm-3 col-form-label">Is regular</label>
+                        <div class="col-sm-9">
+                            <input type="checkbox" [ngModel]="type.regular" class="form-check-input border margin margin-checkbox"
+                                id="regular" formControlName="regular">
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-success" [type]="submit"
+                        [disabled]="!dialogFormControl.valid">Update the
+                        type</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

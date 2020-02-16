@@ -1,0 +1,86 @@
+<br><br><br><br>
+<div class="container" style="overflow-x: auto;">
+    <div class="row">
+
+        <div class="col-4">
+            <img *ngIf="weeklyMenu && weeklyMenu.image" [src]="weeklyMenu.image" id="imageMenu" alt="Menu image">
+        </div>
+        <!--END col-4-->
+
+        <div class="col-5">
+            <div class="card" style="min-width: max-content;">
+                <h4 class="card-header">Add a weekly menu</h4>
+                <br>
+                <div class="card-body justify-content-center">
+                    <form [formGroup]="form" (ngSubmit)="onSubmit()" #formControl="ngForm"
+                        enctype="multipart/form-data">
+                        <div class="form-row">
+
+                            <div class="form-group col-md-6">
+                                <mat-form-field class="example-full-width">
+                                    <input formControlName="dateFrom" id="dateFrom" matInput [matDatepicker]="picker1"
+                                        placeholder="Choose a date" placeholder="Date from" onkeydown="return false"
+                                        [min]="minDateOut">
+                                    <mat-datepicker-toggle matSuffix [for]="picker1">
+                                        <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+                                    </mat-datepicker-toggle>
+                                    <mat-datepicker #picker1></mat-datepicker>
+                                </mat-form-field>
+                            </div>
+                            <!--END form-group col-md-6-->
+
+                            <div class="form-group col-md-6">
+                                <mat-form-field class="example-full-width">
+                                    <input formControlName="dateTo" id="dateTo" matInput [matDatepicker]="picker2"
+                                        placeholder="Choose a date" placeholder="Date to" onkeydown="return false"
+                                        [min]="minDateOut">
+                                    <mat-datepicker-toggle matSuffix [for]="picker2">
+                                        <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+                                    </mat-datepicker-toggle>
+                                    <mat-datepicker #picker2></mat-datepicker>
+                                </mat-form-field>
+                                <!-- <input type="date"  > -->
+                            </div>
+                            <!--END form-group col-md-6-->
+
+                        </div>
+                        <!--END form-row-->
+                        <div class="form-row">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroupFileAddon01">Select image</span>
+                                </div>
+                                <!--END input-group-prepend-->
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="inputGroupFile01"
+                                        aria-describedby="inputGroupFileAddon01" accept='image/*'
+                                        (change)="onSelectFile($event)">
+                                    <label style="overflow: hidden;" class="custom-file-label text-left"
+                                        for="inputGroupFile01">Choose
+                                        menu</label>
+                                </div>
+                                <!--END custom-file-->
+                            </div>
+                            <!--END input-group-->
+
+                        </div>
+                        <!--END form-row-->
+
+                        <br><br><button [type]="submit" class="btn btn-primary" type="submit"
+                            [disabled]="!formControl.valid || !weeklyMenu.image" data-toggle="tooltip"
+                            data-placement="top" title="Add">Add weekly
+                            menu</button>
+                    </form>
+                </div>
+                <!--END card-->
+            </div>
+            <!--END card-->
+
+        </div>
+        <!--END col-5 center-->
+
+    </div>
+    <!--END row-->
+
+</div>
+<!--END container center-->

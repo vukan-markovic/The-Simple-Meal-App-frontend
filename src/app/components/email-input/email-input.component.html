@@ -1,0 +1,19 @@
+<br><br>
+<div class="container email-input">
+    <div class="card">
+        <h4 class="card-header">Enter your email</h4>
+        <div class="card-body">
+            <form [formGroup]="emailForm" (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" formControlName="email" class="form-control" />
+                    <span *ngIf="!emailForm.get('email').valid && emailForm.get('email').touched" class="help-block">
+                        This email address is invalid. Please try again.
+                    </span>
+                </div>
+                <button type="submit" [disabled]="!emailForm.valid" class="btn btn-primary"
+                    data-toggle="tooltip" data-placement="top" title="Send email">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>

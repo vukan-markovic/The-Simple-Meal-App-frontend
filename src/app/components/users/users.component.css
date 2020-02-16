@@ -1,0 +1,26 @@
+.table-user {
+  width: 95%;
+}
+
+.filter-user {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  padding-left: 3%;
+}
+
+
+::ng-deep .mat-sort-header-container {
+  display:flex;
+  justify-content:center;
+
+}
+
+.scrollit {
+  overflow-y:scroll;
+  height:500px;
+}
+
+#search:hover, #search:active {
+  cursor: pointer;
+}

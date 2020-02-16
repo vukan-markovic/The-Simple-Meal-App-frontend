@@ -1,0 +1,22 @@
+<div>
+    <app-header></app-header>
+    <flash-messages></flash-messages>
+    <div *ngIf="authenticationService.isLoggedIn()" align="center">
+        <div *ngIf="message | async" class="alert alert-info" align="center">
+            {{ ((message | async)?.notification)?.body | json | removeQuotes  }}</div>
+        <br>
+    </div>
+    <div *ngIf="authenticationService.isLoggedIn() 
+    && chosenOne 
+    && currentUserOrders 
+    && haveUnpaidOrder 
+    && authenticationService.currentUserValue.role != 'CHOSEN'"
+        class="alert alert-info" align="center">
+        <span>{{chosenOne.name}} {{chosenOne.lastName}} is chosen to collect money for lunch.</span><br>
+        <span>Please find him and give him {{ordersSum}} RSD for what you have ordered.</span>
+    </div>
+    <div align="center">
+        <router-outlet></router-outlet>
+    </div>
+
+</div>
